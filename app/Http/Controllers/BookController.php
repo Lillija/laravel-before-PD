@@ -16,15 +16,22 @@ class BookController extends Controller
         return view('books.create');
     }
 
-    public function store(Request $request) {
-        $book = Book::create([
-            'title' => $request['title'],
-            'author' => $request['author'],
-            'released_at' => $request['released_at'],
-        ]);
+  public function store(Request $request) {
+    $request->validate([
+        'title' => 'required',     
+        'author' => 'required',    
+        'released_at' => 'required|date', 
+    ]);
 
-        return redirect('/books/' . $book->id);
-    }
+    Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'released_at' => $request->released_at,
+    ]);
+    return redirect('/books');
+}
+
+
 
     public function show($id) {
         $book = Book::find($id);
@@ -49,7 +56,10 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::findOrFail($id);
+        try {
         $book->delete();
-        return redirect()->route('books.index')->with('status', 'Book deleted successfully.');
-    }    
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully.');
+    } catch (\Exception $e) {
+        return redirect()->route('books.index')->with('error', 'Failed to delete the book.');
+    }}
 }

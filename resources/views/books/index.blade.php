@@ -1,5 +1,20 @@
-<h1>Books</h1>
+<x-layout>
+    <h1>Books</h1>
+
 <a href="/books/create">Create a book</a>
+
+@if (session('success'))
+    <div>
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div>
+        {{ session('error') }}
+    </div>
+@endif
+
 <ul>
     @foreach($allTheBooks as $book)
         <li>
@@ -16,3 +31,4 @@
         </li>
     @endforeach
 </ul>
+</x-layout>
