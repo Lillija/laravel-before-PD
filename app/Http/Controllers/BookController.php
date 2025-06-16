@@ -23,8 +23,6 @@ class BookController extends Controller
         'released_at' => 'required|date',
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
-
-    // Handle image upload
     if ($request->hasFile('image')) {
         $validated['image_path'] = $request->file('image')->store('books', 'public');
     }

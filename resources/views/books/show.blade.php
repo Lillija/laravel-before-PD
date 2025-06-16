@@ -10,5 +10,5 @@
              style="max-width: 300px; margin-top: 20px;">
     @endif
 
-    <p><a href="{{ route('books.index') }}">All books</a></p>
+    
 </x-layout>

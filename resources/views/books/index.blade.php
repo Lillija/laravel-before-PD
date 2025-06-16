@@ -30,5 +30,7 @@
             </div>
         </li>
     @endforeach
+    <a href="{{ route('algo.bubbleSort') }}">Bubble sort!</a> <br>
+    <a href="{{ route('algo.recursiveFactorial') }}">Faktoriāls!</a> <br>
 </ul>
 </x-layout>
